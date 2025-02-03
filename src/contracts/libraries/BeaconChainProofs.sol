@@ -322,8 +322,8 @@ library BeaconChainProofs {
         return Endian.fromLittleEndianUint64(validatorFields[VALIDATOR_EXIT_EPOCH_INDEX]);
     }
 
-    /// @notice The timestamp of the Pectra hard fork - this is updated on a per-network basis
-    uint64 public constant PECTRA_FORK_TIMESTAMP = 1_739_352_768;
+    /// @notice The Pectra Genesis time on Mekong
+    uint64 public constant PECTRA_FORK_TIMESTAMP = 1_730_822_400;
 
     /// @dev We check if the proofTimestamp is <= pectraForkTimestamp because a `proofTimestamp` at the `pectraForkTimestamp`
     ///      is considered to be Pre-Pectra given the EIP-4788 oracle returns the parent block.

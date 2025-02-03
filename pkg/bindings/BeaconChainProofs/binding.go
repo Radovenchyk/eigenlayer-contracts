@@ -31,8 +31,8 @@ var (
 
 // BeaconChainProofsMetaData contains all meta data concerning the BeaconChainProofs contract.
 var BeaconChainProofsMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"error\",\"name\":\"InvalidProof\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"InvalidProofLength\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"InvalidValidatorFieldsLength\",\"inputs\":[]}]",
-	Bin: "0x60556032600b8282823980515f1a607314602657634e487b7160e01b5f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f5ffdfea264697066735822122008cce030eef89bfa5bdc495fd3132a80b290f7c5211b5ff5314d2604022ce60764736f6c634300081b0033",
+	ABI: "[{\"type\":\"function\",\"name\":\"PECTRA_FORK_TIMESTAMP\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint64\",\"internalType\":\"uint64\"}],\"stateMutability\":\"view\"},{\"type\":\"error\",\"name\":\"InvalidProof\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"InvalidProofLength\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"InvalidValidatorFieldsLength\",\"inputs\":[]}]",
+	Bin: "0x60936032600b8282823980515f1a607314602657634e487b7160e01b5f525f60045260245ffd5b305f52607381538281f3fe73000000000000000000000000000000000000000030146080604052600436106032575f3560e01c80634027da19146036575b5f5ffd5b604063672a410081565b60405167ffffffffffffffff909116815260200160405180910390f3fea2646970667358221220da57da86aa895dde525e96cb1e68a7134797f064cc2fcc3d8a78e7d7445c8f2c64736f6c634300081b0033",
 }
 
 // BeaconChainProofsABI is the input ABI used to generate the binding from.
@@ -200,4 +200,35 @@ func (_BeaconChainProofs *BeaconChainProofsTransactorRaw) Transfer(opts *bind.Tr
 // Transact invokes the (paid) contract method with params as input values.
 func (_BeaconChainProofs *BeaconChainProofsTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
 	return _BeaconChainProofs.Contract.contract.Transact(opts, method, params...)
+}
+
+// PECTRAFORKTIMESTAMP is a free data retrieval call binding the contract method 0x4027da19.
+//
+// Solidity: function PECTRA_FORK_TIMESTAMP() view returns(uint64)
+func (_BeaconChainProofs *BeaconChainProofsCaller) PECTRAFORKTIMESTAMP(opts *bind.CallOpts) (uint64, error) {
+	var out []interface{}
+	err := _BeaconChainProofs.contract.Call(opts, &out, "PECTRA_FORK_TIMESTAMP")
+
+	if err != nil {
+		return *new(uint64), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(uint64)).(*uint64)
+
+	return out0, err
+
+}
+
+// PECTRAFORKTIMESTAMP is a free data retrieval call binding the contract method 0x4027da19.
+//
+// Solidity: function PECTRA_FORK_TIMESTAMP() view returns(uint64)
+func (_BeaconChainProofs *BeaconChainProofsSession) PECTRAFORKTIMESTAMP() (uint64, error) {
+	return _BeaconChainProofs.Contract.PECTRAFORKTIMESTAMP(&_BeaconChainProofs.CallOpts)
+}
+
+// PECTRAFORKTIMESTAMP is a free data retrieval call binding the contract method 0x4027da19.
+//
+// Solidity: function PECTRA_FORK_TIMESTAMP() view returns(uint64)
+func (_BeaconChainProofs *BeaconChainProofsCallerSession) PECTRAFORKTIMESTAMP() (uint64, error) {
+	return _BeaconChainProofs.Contract.PECTRAFORKTIMESTAMP(&_BeaconChainProofs.CallOpts)
 }
