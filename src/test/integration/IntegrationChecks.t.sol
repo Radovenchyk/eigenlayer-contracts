@@ -935,7 +935,9 @@ contract IntegrationCheckUtils is IntegrationBase {
         User staker,
         uint40[] memory slashedValidators,
         uint256 originalWithdrawableShares,
-        uint64 slashedBalanceGwei
+        uint64 slashedBalanceGwei,
+        AllocateParams memory allocateParams,
+        SlashingParams memory slashingParams
     ) internal {
         // Checkpoint State
         check_CompleteCheckpoint_State(staker);
@@ -946,6 +948,6 @@ contract IntegrationCheckUtils is IntegrationBase {
         // Between the AVS slash and the BC slash, the shares should have decreased by at least the BC slash amount
         assert_withdrawableSharesDecreasedByAtLeast(staker, BEACONCHAIN_ETH_STRAT, originalWithdrawableShares, uint256(slashedBalanceGwei * GWEI_TO_WEI), "should have decreased withdrawable shares by at least the BC slash amount");
 
-        assert_withdrawbleShare
+        // 
     }
 }
