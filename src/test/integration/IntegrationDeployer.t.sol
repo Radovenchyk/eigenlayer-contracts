@@ -211,6 +211,12 @@ abstract contract IntegrationDeployer is ExistingDeploymentParser {
         cheats.warp(BEACON_GENESIS_TIME);
         timeMachine = new TimeMachine();
         beaconChain = new BeaconChainMock(eigenPodManager, BEACON_GENESIS_TIME);
+
+        // Set the `pectraForkTimestamp` on the EigenPodManager. Use pectra state
+        cheats.startPrank(executorMultisig);
+        eigenPodManager.setProofTimestampSetter(executorMultisig);
+        eigenPodManager.setPectraForkTimestamp(BEACON_GENESIS_TIME); 
+        cheats.stopPrank();
     }
 
     /// Parse existing contracts from mainnet
@@ -251,6 +257,12 @@ abstract contract IntegrationDeployer is ExistingDeploymentParser {
         // prior to test. `isUpgraded` is true by default, but is set to false in `UpgradeTest.t.sol`
         if (isUpgraded) {
             _upgradeMainnetContracts();
+
+            // Set the `pectraForkTimestamp` on the EigenPodManager. Use pectra state
+            cheats.startPrank(executorMultisig);
+            eigenPodManager.setProofTimestampSetter(executorMultisig);
+            eigenPodManager.setPectraForkTimestamp(BEACON_GENESIS_TIME); 
+            cheats.stopPrank();
         }
     }
 
@@ -692,8 +704,8 @@ abstract contract IntegrationDeployer is ExistingDeploymentParser {
             tokenBalances = new uint[](1);
 
             // Award the user with a random amount of ETH
-            // This guarantees a multiple of 32 ETH (at least 1, up to/incl 5)
-            uint amount = 32 ether * _randUint({min: 1, max: 5});
+            // This guarantees a multiple of 32 ETH (at least 1, up to/incl 2080)
+            uint amount = 32 ether * _randUint({min: 1, max: 65});
             cheats.deal(address(user), amount);
 
             strategies[0] = BEACONCHAIN_ETH_STRAT;
@@ -716,8 +728,8 @@ abstract contract IntegrationDeployer is ExistingDeploymentParser {
             }
 
             // Award the user with a random amount of ETH
-            // This guarantees a multiple of 32 ETH (at least 1, up to/incl 5)
-            uint amount = 32 ether * _randUint({min: 1, max: 5});
+            // This guarantees a multiple of 32 ETH (at least 1, up to/incl 2080)
+            uint amount = 32 ether * _randUint({min: 1, max: 65});
             cheats.deal(address(user), amount);
 
             // Add BEACONCHAIN_ETH_STRAT and eth balance
